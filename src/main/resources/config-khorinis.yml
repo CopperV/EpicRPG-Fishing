@@ -1,0 +1,54 @@
+worlds:
+- kolonia1
+blocked_regions:
+- pole_ryzowe
+fish:
+  '1':
+    mm_id: Fish1
+    chance: 7
+  '2':
+    mm_id: Fish2
+    chance: 7
+  '3':
+    mm_id: Fish3
+    chance: 6
+  '4':
+    mm_id: Fish4
+    chance: 6
+  '5':
+    mm_id: Fish5
+    chance: 6
+  '6':
+    mm_id: Fish6
+    chance: 5
+  '7':
+    mm_id: Fish7
+    chance: 5
+  '8':
+    mm_id: Fish8
+    chance: 5
+  '9':
+    mm_id: Fish9
+    chance: 4
+  '10':
+    mm_id: Fish10
+    chance: 4
+  '11':
+    mm_id: Fish11
+    chance: 4
+  '12':
+    mm_id: Fish12
+    chance: 3
+  '13':
+    mm_id: Fish13
+    chance: 3
+  '14':
+    mm_id: Fish14
+    chance: 2
+  '15':
+    mm_id: Fish15
+    chance: 2
+  '16':
+    mm_id: Fish16
+    chance: 1
+multiplier: 10
