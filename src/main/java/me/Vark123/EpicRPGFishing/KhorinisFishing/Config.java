@@ -22,10 +22,13 @@ public final class Config {
 	private final Collection<String> disabledRegions;
 	private final TreeMap<Integer, String> fishChances;
 	
+	private final int multiplier;
+	
 	private Config() {
 		allowedWorlds = new HashSet<>();
 		disabledRegions = new HashSet<>();
 		fishChances = new TreeMap<>();
+		multiplier = 10;
 	}
 	
 	public static final Config get() {

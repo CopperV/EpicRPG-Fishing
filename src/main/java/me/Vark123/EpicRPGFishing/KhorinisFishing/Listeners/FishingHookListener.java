@@ -3,8 +3,6 @@ package me.Vark123.EpicRPGFishing.KhorinisFishing.Listeners;
 import java.util.Set;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
-import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +18,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.Vark123.EpicRPGFishing.Main;
 import me.Vark123.EpicRPGFishing.KhorinisFishing.Config;
 import me.Vark123.EpicRPGFishing.KhorinisFishing.FishingController;
-import net.minecraft.network.protocol.game.PacketPlayOutAnimation;
+import me.Vark123.EpicRPGFishing.QTESystem.QTEManager;
+import me.Vark123.EpicRPGFishing.Tools.Utils;
 
 public class FishingHookListener implements Listener {
 
@@ -47,15 +46,11 @@ public class FishingHookListener implements Listener {
 				.findAny()
 				.ifPresent(region -> protectedRegion.setTrue());
 			if(protectedRegion.isTrue()) {
-				hook.remove();
-				PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer)p).getHandle(), 0);
-				((CraftPlayer)p).getHandle().b.a(packet);
-				p.playSound(p.getLocation(), Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1, 0.5f);
+				Utils.stopFishing(hook);
 				return;
 			}
 		}
 		
-		p.sendMessage(e.getState().name());
 		switch(e.getState()) {
 			case FISHING:
 				BukkitTask task = new BukkitRunnable() {
@@ -74,6 +69,8 @@ public class FishingHookListener implements Listener {
 						}
 						if(hook.isInWater()) {
 							FishingController.get().removeHookWaterTask(p);
+							QTEManager.get().startQTE(p, hook);
+							return;
 						}
 					}
 				}.runTaskTimer(Main.getInst(), 0, 5);
