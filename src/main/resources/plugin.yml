@@ -1,9 +1,9 @@
 name: EpicRPGFishing
-version: 2.0.0-Alpha
+version: 2.0.0
 main: me.Vark123.EpicRPGFishing.Main
 author: Vark123
 depend: [MythicMobs,NBTAPI,WorldGuard,MultiWorld]
-api-version: 1.16
+api-version: 1.18
 
 commands:
   epicfishing:
