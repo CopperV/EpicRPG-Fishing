@@ -77,13 +77,15 @@ public class FishingHookListener implements Listener {
 				FishingController.get().addHookWaterTask(p, task);
 				break;
 			case BITE:
-				break;
 			case CAUGHT_ENTITY:
+				e.setCancelled(true);
 				break;
 			case FAILED_ATTEMPT:
 				break;
 			default:
 				FishingController.get().removeHookWaterTask(p);
+				if(hook.getHookedEntity() != null)
+					hook.setHookedEntity(null);
 				break;
 		}
 	}

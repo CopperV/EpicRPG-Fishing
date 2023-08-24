@@ -165,7 +165,9 @@ public final class QTEManager {
 		Bukkit.getPluginManager().callEvent(event);
 		if(event.isCancelled())
 			return;
-		me.Vark123.EpicRPG.Utils.Utils.dropItemStack(p, it);
+		p.getInventory().addItem(it).values().forEach(item -> {
+			me.Vark123.EpicRPG.Utils.Utils.dropItemStack(p, item);
+		});
 		
 		double avr = holder.getAvrTime();
 		double var = holder.calcVariance();
