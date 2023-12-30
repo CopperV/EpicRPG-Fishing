@@ -1,0 +1,630 @@
+worlds:
+- Tanalorr
+upgrades:
+  lucky:
+    display: "&4★ &8Szczescie: "
+    levels:
+      0:
+        id: lucky_0
+        value-display: "&7&o0%"
+        value: 0
+      1:
+        id: lucky_1
+        value-display: "&7&o1%"
+        value: 0.01
+        costs:
+          money: 30000
+      2:
+        id: lucky_1
+        value-display: "&7&o2%"
+        value: 0.02
+        costs:
+          coins: 44000
+      3:
+        id: lucky_3
+        value-display: "&7&o3%"
+        value: 0.03
+        costs:
+          stygia: 7500
+      4:
+        id: lucky_4
+        value-display: "&7&o4%"
+        value: 0.04
+        costs:
+          ruda: 8500
+      5:
+        id: lucky_5
+        value-display: "&7&o5%"
+        value: 0.05
+        costs:
+          money: 45000
+          coins: 49000
+      6:
+        id: lucky_6
+        value-display: "&7&o6%"
+        value: 0.06
+        costs:
+          money: 58000
+          stygia: 6800
+      7:
+        id: lucky_7
+        value-display: "&7&o7%"
+        value: 0.07
+        costs:
+          money: 67500
+          ruda: 8000
+      8:
+        id: lucky_8
+        value-display: "&7&o8%"
+        value: 0.08
+        costs:
+          stygia: 9000
+          ruda: 11000
+      9:
+        id: lucky_9
+        value-display: "&7&o9%"
+        value: 0.09
+        costs:
+          money: 200000
+      10:
+        id: lucky_10
+        value-display: "&7&o10%"
+        value: 0.1
+        costs:
+          coins: 80000
+          stygia: 10000
+          ruda: 12500
+      11:
+        id: lucky_11
+        value-display: "&7&o11%"
+        value: 0.11
+        costs:
+          money: 100000
+          coins: 115000
+          stygia: 11000
+      12:
+        id: lucky_12
+        value-display: "&7&o12%"
+        value: 0.12
+        costs:
+          money: 120000
+          coins: 125000
+          ruda: 14000
+      13:
+        id: lucky_13
+        value-display: "&7&o13%"
+        value: 0.13
+        costs:
+          coins: 145000
+          stygia: 15000
+          ruda: 17500
+      14:
+        id: lucky_14
+        value-display: "&7&o14%"
+        value: 0.14
+        costs:
+          money: 500000
+      15:
+        id: lucky_15
+        value-display: "&7&o15%"
+        value: 0.15
+        costs:
+          money: 250000
+          coins: 280000
+          stygia: 24000
+          ruda: 28000
+  rod:
+    display: "&4★ &8Wedzisko: "
+    levels:
+      0:
+        id: rod_0
+        value-display: "&7&oSpruchniale drewno"
+        value: 0.1
+      1:
+        id: rod_1
+        value-display: "&2&oStare drewno"
+        value: 0.11
+        costs:
+          money: 20000
+          coins: 25000
+      2:
+        id: rod_2
+        value-display: "&a&oElfickie drewno"
+        value: 0.12
+        costs:
+          ruda: 3500
+          stygia: 2800
+      3:
+        id: rod_3
+        value-display: "&c&oKauczukowe drewno"
+        value: 0.13
+        costs:
+          money: 42000
+          ruda: 8250
+      4:
+        id: rod_4
+        value-display: "&e&oWypolerowane drewno"
+        value: 0.14
+        costs:
+          coins: 64000
+          stygia: 6250
+      5:
+        id: rod_5
+        value-display: "&3&oZaczarowane drewno"
+        value: 0.15
+        costs:
+          money: 77500
+          stygia: 8000
+      6:
+        id: rod_6
+        value-display: "&9&oWzmocnione drewno"
+        value: 0.16
+        costs:
+          coins: 95000
+          ruda: 9650
+      7:
+        id: rod_7
+        value-display: "&6&oZdobione drewno"
+        value: 0.17
+        costs:
+          coins: 215000
+      8:
+        id: rod_8
+        value-display: "&8&oCiemna stal"
+        value: 0.18
+        costs:
+          ruda: 24000
+      9:
+        id: rod_9
+        value-display: "&7&oJasna stal"
+        value: 0.19
+        costs:
+          stygia: 25250
+      10:
+        id: rod_10
+        value-display: "&c&oPraelfia stal"
+        value: 0.2
+        costs:
+          money: 275000
+      11:
+        id: rod_11
+        value-display: "&3&oMithril"
+        value: 0.21
+        costs:
+          coins: 80000
+          ruda: 15000
+          stygia: 10000
+      12:
+        id: rod_12
+        value-display: "&b&oWzbogacony mithril"
+        value: 0.22
+        costs:
+          money: 50000
+          coins: 60000
+          ruda: 15000
+          stygia: 10000
+      13:
+        id: rod_13
+        value-display: "&8&oCzarny mithril"
+        value: 0.23
+        costs:
+          coins: 220000
+          ruda: 20000
+      14:
+        id: rod_14
+        value-display: "&6&oPraelfie zloto"
+        value: 0.24
+        costs:
+          money: 300000
+          coins: 200000
+      15:
+        id: rod_15
+        value-display: "&5&oTajemniczy material"
+        value: 0.25
+        costs:
+          ruda: 40000
+          stygia: 36000
+  reel:
+    display: "&4★ &8Kolowrotek: "
+    levels:
+      0:
+        id: reel_0
+        value-display: "&c&oZardzewialy"
+        value: 1
+      1:
+        id: reel_1
+        value-display: "&7&oStalowy"
+        value: 1.2
+        costs:
+          coins: 22500
+          ruda: 2300
+      2:
+        id: reel_2
+        value-display: "&6&oPozlacany"
+        value: 1.4
+        costs:
+          money: 38000
+          coins: 40000
+      3:
+        id: reel_3
+        value-display: "&b&oMithrilowy"
+        value: 1.6
+        costs:
+          money: 37500
+          ruda: 3625
+          stygia: 3500
+      4:
+        id: reel_4
+        value-display: "&5&oZaklety"
+        value: 1.8
+        costs:
+          money: 75000
+          ruda: 7800
+      5:
+        id: reel_5
+        value-display: "&9&lGlebinowy"
+        value: 2
+        costs:
+          ruda: 25000
+  line:
+    display: "&4★ &8Zylka: "
+    levels:
+      0:
+        id: line_0
+        value-display: "&f&oLinowa"
+        value: 1
+      1:
+        id: line_1
+        value-display: "&3&oRybacka"
+        value: 0.95
+        costs:
+          ruda: 2300
+      2:
+        id: line_2
+        value-display: "&a&oLowiecka"
+        value: 0.9
+        costs:
+          money: 22000
+          coins: 23750
+      3:
+        id: line_3
+        value-display: "&9&oSplawikowa"
+        value: 0.85
+        costs:
+          coins: 38000
+          ruda: 3700
+      4:
+        id: line_4
+        value-display: "&c&oMiedziana"
+        value: 0.8
+        costs:
+          coins: 55000
+          stygia: 4900
+      5:
+        id: line_5
+        value-display: "&6&oPozlacana"
+        value: 0.75
+        costs:
+          money: 130000
+      6:
+        id: line_6
+        value-display: "&5&oKarpiowa"
+        value: 0.7
+        costs:
+          money: 83000
+          ruda: 8250
+      7:
+        id: line_7
+        value-display: "&3&oMorska"
+        value: 0.65
+        costs:
+          money: 64000
+          ruda: 6500
+          stygia: 6300
+      8:
+        id: line_8
+        value-display: "&e&oPradziadunia"
+        value: 0.6
+        costs:
+          stygia: 20000
+      9:
+        id: line_9
+        value-display: "&f&oStalowa"
+        value: 0.55
+        costs:
+          money: 85000
+          coins: 87000
+          ruda: 8150
+      10:
+        id: line_10
+        value-display: "&b&oMithrilowa"
+        value: 0.5
+        costs:
+          ruda: 16500
+          stygia: 15500
+  hook:
+    display: "&4★ &8Haczyk: "
+    levels:
+      0:
+        id: hook_0
+        value-display: "&7&oKamienny"
+        value: 0
+      1:
+        id: hook_1
+        value-display: "&b&oRybacki"
+        value: 1
+        costs:
+          money: 18000
+      2:
+        id: hook_2
+        value-display: "&7&oStalowy"
+        value: 1
+        costs:
+          money: 15000
+          coins: 16000
+      3:
+        id: hook_3
+        value-display: "&6&oPozlacany"
+        value: 1
+        costs:
+          money: 24500
+          stygia: 2575
+      4:
+        id: hook_4
+        value-display: "&c&oPraelfi"
+        value: 1
+        costs:
+          coins: 39000
+          ruda: 3850
+      5:
+        id: hook_5
+        value-display: "&b&oMithrilowy"
+        value: 1
+        costs:
+          ruda: 5500
+          stygia: 5300
+      6:
+        id: hook_6
+        value-display: "&3&oZaklety"
+        value: 1
+        costs:
+          money: 37500
+          coins: 39000
+          ruda: 3860
+          stygia: 3740
+      7:
+        id: hook_7
+        value-display: "&9&oTrojkatny"
+        value: 1
+        costs:
+          money: 100000
+          stygia: 10000
+drops:
+  1:
+    id: Fish1_Tanalorr
+    chance: 0.17
+  2:
+    id: Silver_Chest_1a
+    chance: 0.015
+  3:
+    id: Silver_Chest_1b
+    chance: 0.015
+  4:
+    id: Silver_Chest_1c
+    chance: 0.015
+  5:
+    id: Silver_Chest_1d
+    chance: 0.015
+  6:
+    id: Silver_Chest_1e
+    chance: 0.015
+  7:
+    id: Fish2_Tanalorr
+    chance: 0.08
+  8:
+    id: Golden_Chest_1a
+    chance: 0.015
+  9:
+    id: Golden_Chest_1b
+    chance: 0.015
+  10:
+    id: Golden_Chest_1c
+    chance: 0.015
+  11:
+    id: Golden_Chest_1d
+    chance: 0.015
+  12:
+    id: Fish3_Tanalorr
+    chance: 0.065
+  13:
+    id: Fish4_Tanalorr
+    chance: 0.06
+  14:
+    id: Silver_Chest_2a
+    chance: 0.01
+  15:
+    id: Silver_Chest_2b
+    chance: 0.01
+  16:
+    id: Silver_Chest_2c
+    chance: 0.01
+  17:
+    id: Silver_Chest_2d
+    chance: 0.01
+  18:
+    id: Silver_Chest_2e
+    chance: 0.01
+  19:
+    id: Fish5_Tanalorr
+    chance: 0.06
+  20:
+    id: Fish6_Tanalorr
+    chance: 0.05
+  21:
+    id: Golden_Chest_2a
+    chance: 0.01
+  22:
+    id: Golden_Chest_2b
+    chance: 0.01
+  23:
+    id: Golden_Chest_2c
+    chance: 0.01
+  24:
+    id: Golden_Chest_2d
+    chance: 0.01
+  25:
+    id: Fish7_Tanalorr
+    chance: 0.045
+  26:
+    id: Fish8_Tanalorr
+    chance: 0.04
+  27:
+    id: Silver_Chest_3a
+    chance: 0.0075
+  28:
+    id: Silver_Chest_3b
+    chance: 0.0075
+  29:
+    id: Silver_Chest_3c
+    chance: 0.0075
+  30:
+    id: Silver_Chest_3d
+    chance: 0.0075
+  31:
+    id: Silver_Chest_3e
+    chance: 0.0075
+  32:
+    id: Fish9_Tanalorr
+    chance: 0.0375
+  33:
+    id: Fish10_Tanalorr
+    chance: 0.03
+  34:
+    id: Golden_Chest_3a
+    chance: 0.0075
+  35:
+    id: Golden_Chest_3b
+    chance: 0.0075
+  36:
+    id: Golden_Chest_3c
+    chance: 0.0075
+  37:
+    id: Golden_Chest_3d
+    chance: 0.0075
+  38:
+    id: Fish11_Tanalorr
+    chance: 0.02
+  39:
+    id: Fish12_Tanalorr
+    chance: 0.01
+  40:
+    id: Silver_Chest_4a
+    chance: 0.004
+  41:
+    id: Silver_Chest_4b
+    chance: 0.004
+  42:
+    id: Silver_Chest_4c
+    chance: 0.004
+  43:
+    id: Silver_Chest_4d
+    chance: 0.004
+  44:
+    id: Silver_Chest_4e
+    chance: 0.004
+  45:
+    id: Fish13_Tanalorr
+    chance: 0.004
+  46:
+    id: Golden_Chest_4a
+    chance: 0.004
+  47:
+    id: Golden_Chest_4b
+    chance: 0.004
+  48:
+    id: Golden_Chest_4c
+    chance: 0.004
+  49:
+    id: Golden_Chest_4d
+    chance: 0.004
+merchants:
+  halvor:
+    id: halvor
+    display: "&3&oHalvor"
+    offers:
+      Silver_Chest_Empty:
+        money: 180
+      Golden_Chest_Empty:
+        money: 250
+      Silver_Chest_1a:
+        money: 800
+      Silver_Chest_1b:
+        money: 800
+      Silver_Chest_1c:
+        money: 800
+      Silver_Chest_1d:
+        money: 800
+      Silver_Chest_1e:
+        money: 800
+      Silver_Chest_2a:
+        money: 800
+      Silver_Chest_2b:
+        money: 800
+      Silver_Chest_2c:
+        money: 800
+      Silver_Chest_2d:
+        money: 800
+      Silver_Chest_2e:
+        money: 800
+      Silver_Chest_3a:
+        money: 800
+      Silver_Chest_3b:
+        money: 800
+      Silver_Chest_3c:
+        money: 800
+      Silver_Chest_3d:
+        money: 800
+      Silver_Chest_3e:
+        money: 800
+      Silver_Chest_4a:
+        money: 800
+      Silver_Chest_4b:
+        money: 800
+      Silver_Chest_4c:
+        money: 800
+      Silver_Chest_4d:
+        money: 800
+      Silver_Chest_4e:
+        money: 800
+      Golden_Chest_1a:
+        money: 1000
+      Golden_Chest_1b:
+        money: 1000
+      Golden_Chest_1c:
+        money: 1000
+      Golden_Chest_1d:
+        money: 1000
+      Golden_Chest_2a:
+        money: 1000
+      Golden_Chest_2b:
+        money: 1000
+      Golden_Chest_2c:
+        money: 1000
+      Golden_Chest_2d:
+        money: 1000
+      Golden_Chest_3a:
+        money: 1000
+      Golden_Chest_3b:
+        money: 1000
+      Golden_Chest_3c:
+        money: 1000
+      Golden_Chest_3d:
+        money: 1000
+      Golden_Chest_4a:
+        money: 1000
+      Golden_Chest_4b:
+        money: 1000
+      Golden_Chest_4c:
+        money: 1000
+      Golden_Chest_4d:
+        money: 1000

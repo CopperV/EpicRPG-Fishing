@@ -2,6 +2,7 @@ package me.Vark123.EpicRPGFishing.KhorinisFishing;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.mutable.MutableInt;
@@ -12,9 +13,9 @@ import lombok.Getter;
 import me.Vark123.EpicRPGFishing.FileManager;
 
 @Getter
-public final class Config {
+public final class KhorinisConfig {
 
-	private static final Config conf = new Config();
+	private static final KhorinisConfig conf = new KhorinisConfig();
 	
 	private boolean init;
 	
@@ -24,14 +25,16 @@ public final class Config {
 	
 	private final int multiplier;
 	
-	private Config() {
+	private final Random rand = new Random();
+	
+	private KhorinisConfig() {
 		allowedWorlds = new HashSet<>();
 		disabledRegions = new HashSet<>();
 		fishChances = new TreeMap<>();
 		multiplier = 10;
 	}
 	
-	public static final Config get() {
+	public static final KhorinisConfig get() {
 		return conf;
 	}
 	

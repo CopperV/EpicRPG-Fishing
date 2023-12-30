@@ -16,7 +16,7 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import me.Vark123.EpicRPGFishing.Main;
-import me.Vark123.EpicRPGFishing.KhorinisFishing.Config;
+import me.Vark123.EpicRPGFishing.KhorinisFishing.KhorinisConfig;
 import me.Vark123.EpicRPGFishing.KhorinisFishing.FishingController;
 import me.Vark123.EpicRPGFishing.QTESystem.QTEManager;
 import me.Vark123.EpicRPGFishing.Tools.Utils;
@@ -31,7 +31,7 @@ public class FishingHookListener implements Listener {
 		FishHook hook = e.getHook();
 		Player p = e.getPlayer();
 		String w = p.getWorld().getName();
-		if(!Config.get().getAllowedWorlds().contains(w))
+		if(!KhorinisConfig.get().getAllowedWorlds().contains(w))
 			return;
 		
 		Set<ProtectedRegion> regions = WorldGuard.getInstance().getPlatform()
@@ -42,7 +42,7 @@ public class FishingHookListener implements Listener {
 			MutableBoolean protectedRegion = new MutableBoolean();
 			regions.stream()
 				.map(region -> region.getId())
-				.filter(Config.get().getDisabledRegions()::contains)
+				.filter(KhorinisConfig.get().getDisabledRegions()::contains)
 				.findAny()
 				.ifPresent(region -> protectedRegion.setTrue());
 			if(protectedRegion.isTrue()) {

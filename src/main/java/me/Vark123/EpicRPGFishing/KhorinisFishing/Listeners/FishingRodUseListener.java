@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 import de.tr7zw.nbtapi.NBTItem;
 import me.Vark123.EpicRPGFishing.Events.FishingRodUseEvent;
-import me.Vark123.EpicRPGFishing.KhorinisFishing.Config;
+import me.Vark123.EpicRPGFishing.KhorinisFishing.KhorinisConfig;
 
 public class FishingRodUseListener implements Listener {
 
@@ -22,7 +22,7 @@ public class FishingRodUseListener implements Listener {
 		ItemStack it = e.getFishingRod();
 		
 		String w = p.getWorld().getName();
-		if(!Config.get().getAllowedWorlds().contains(w))
+		if(!KhorinisConfig.get().getAllowedWorlds().contains(w))
 			return;
 		
 		NBTItem nbt = new NBTItem(it);
