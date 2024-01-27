@@ -4,10 +4,13 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event.Result;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,6 +22,7 @@ import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
 import io.github.rysefoxx.inventory.plugin.enums.Action;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
+import io.github.rysefoxx.inventory.plugin.other.EventCreator;
 import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
 import me.Vark123.EpicRPG.Core.CoinsSystem;
@@ -67,7 +71,7 @@ public final class TanalorrMerchantMenu {
 			im.setDisplayName("§2§lPOTWIERDZ");
 			confirm.setItemMeta(im);
 		}
-		reject = new ItemStack(Material.EMERALD);{
+		reject = new ItemStack(Material.REDSTONE);{
 			ItemMeta im = reject.getItemMeta();
 			im.setDisplayName("§c§lODRZUC");
 			reject.setItemMeta(im);
@@ -89,6 +93,7 @@ public final class TanalorrMerchantMenu {
 			.enableAction(Action.MOVE_TO_OTHER_INVENTORY)
 			.ignoreClickEvent(DisabledInventoryClick.BOTTOM)
 			.ignoreEvents(DisabledEvents.INVENTORY_DRAG)
+			.listener(getClickEvent())
 			.provider(getProvider(p, merchant))
 			.build(Main.getInst())
 			.open(p);
@@ -133,30 +138,30 @@ public final class TanalorrMerchantMenu {
 		MutableInt coinsValue = new MutableInt();
 		MutableInt rudaValue = new MutableInt();
 		Map<Integer, ItemStack> correctItems = new LinkedHashMap<>();
+		Inventory inv = contents.pagination().inventory().getInventory();
 		for(int i = 0; i < 27; ++i) {
-			MutableInt index = new MutableInt(i);
-			contents.get(i).ifPresent(_item -> {
-				ItemStack it = _item.getItemStack();
-				
-				NBTItem nbt = new NBTItem(it);
-				if(!nbt.hasTag("MYTHIC_TYPE"))
-					return;
-				
-				String mmId = nbt.getString("MYTHIC_TYPE");
-				if(!merchant.getOffers().containsKey(mmId))
-					return;
-				
-				correctItems.put(index.getValue(), it);
-				merchant.getOffers().get(mmId).forEach(price -> {
-					if(price instanceof MoneyPrice)
-						moneyValue.add(price.getAmount() * it.getAmount());
-					else if(price instanceof StygiaPrice)
-						stygiaValue.add(price.getAmount() * it.getAmount());
-					else if(price instanceof CoinsPrice)
-						coinsValue.add(price.getAmount() * it.getAmount());
-					else if(price instanceof RudaPrice)
-						rudaValue.add(price.getAmount() * it.getAmount());
-				});
+			ItemStack it = inv.getItem(i);
+			if(it == null || it.getType().equals(Material.AIR))
+				continue;			
+			
+			NBTItem nbt = new NBTItem(it);
+			if(!nbt.hasTag("MYTHIC_TYPE"))
+				continue;
+			
+			String mmId = nbt.getString("MYTHIC_TYPE");
+			if(!merchant.getOffers().containsKey(mmId))
+				continue;
+
+			correctItems.put(i, it);
+			merchant.getOffers().get(mmId).forEach(price -> {
+				if(price instanceof MoneyPrice)
+					moneyValue.add(price.getAmount() * it.getAmount());
+				else if(price instanceof StygiaPrice)
+					stygiaValue.add(price.getAmount() * it.getAmount());
+				else if(price instanceof CoinsPrice)
+					coinsValue.add(price.getAmount() * it.getAmount());
+				else if(price instanceof RudaPrice)
+					rudaValue.add(price.getAmount() * it.getAmount());
 			});
 		}
 		
@@ -196,6 +201,33 @@ public final class TanalorrMerchantMenu {
 		contents.updateOrSet(34, IntelligentItem.of(reject, e -> {
 			generateSellMenu(p, merchant, contents);
 		}));
+	}
+	
+	private EventCreator<InventoryClickEvent> getClickEvent() {
+		Consumer<InventoryClickEvent> event = e -> {
+			if(e.isCancelled())
+				return;
+
+			Inventory inv = e.getView().getTopInventory();
+			if(!inv.getItem(31).getType().equals(Material.PAPER))
+				return;
+
+			if(e.isShiftClick()) {
+				e.setResult(Result.DENY);
+				e.setCancelled(true);
+				return;
+			}
+
+			List<Integer> freeSlotList = Utils.intArrayToList(freeSlots);
+			int slot = e.getSlot();
+			if(!freeSlotList.contains(slot))
+				return;
+
+			e.setCancelled(true);
+		};
+		
+		EventCreator<InventoryClickEvent> creator = new EventCreator<>(InventoryClickEvent.class, event);
+		return creator;
 	}
 	
 }
