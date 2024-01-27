@@ -5,10 +5,13 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -18,6 +21,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import de.tr7zw.nbtapi.NBTItem;
@@ -163,6 +167,20 @@ public final class TanalorrFishingController {
 		if(b2 != null && (b1.isLiquid() || b2.getType().equals(Material.COBWEB)))
 			return;
 
+		World w = p.getWorld();
+		Location loc1 = p.getEyeLocation();
+		Location loc2 = p.getLocation().add(0,1,0);
+		Location target = cont.getHook().getLocation();
+		Vector vec1 = new Vector(target.getX() - loc1.getX(),
+				target.getY() - loc1.getY(),
+				target.getZ() - loc1.getZ()).normalize();
+		Vector vec2 = new Vector(target.getX() - loc2.getX(),
+				target.getY() - loc2.getY(),
+				target.getZ() - loc2.getZ()).normalize();
+		RayTraceResult result1 = w.rayTrace(loc1, vec1, 80, FluidCollisionMode.ALWAYS, false, .8, cont.getHook()::equals);
+		RayTraceResult result2 = w.rayTrace(loc2, vec2, 80, FluidCollisionMode.ALWAYS, false, .8, cont.getHook()::equals);
+		if(result1.getHitEntity() == null || result2.getHitEntity() == null)
+			return;
 		cont.setState(TanalorrFishingState.FISHING);
 		
 		BossBar bar = Bukkit.createBossBar("§9RYBI BOJ", BarColor.BLUE, BarStyle.SOLID);
@@ -262,12 +280,17 @@ public final class TanalorrFishingController {
 				}
 				bar.setProgress(cont.getFishingStatus());
 				
+				double movementSpeed = p.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
+				double pullValue = PULL_FORCE * multiplier * movementSpeed;
+				if(pullValue < 0.1)
+					pullValue = 0.1;
+				
 				Location loc = p.getLocation();
 				Vector vec = new Vector(loc.getX() - hookLoc.getX(), 0, loc.getZ() - hookLoc.getZ()).normalize().multiply(-1);
 				
 				double x = rand.nextDouble(1) + 0.5 * multiplier;
 				double z = rand.nextDouble(1) + 0.5 * multiplier;
-				vec.multiply(new Vector(x, 0, z)).normalize().multiply(PULL_FORCE * multiplier);
+				vec.multiply(new Vector(x, 0, z)).normalize().multiply(pullValue);
 				
 				p.setVelocity(vec);
 			}
