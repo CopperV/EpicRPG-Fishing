@@ -6,7 +6,7 @@ depend: [MythicMobs,NBTAPI,WorldGuard,MultiWorld]
 api-version: 1.18
 
 libraries:
-  - io.github.rysefoxx.inventory:RyseInventory-Plugin:1.6.3
+  - io.github.rysefoxx.inventory:RyseInventory-Plugin:1.6.5
 
 commands:
   epicfishing:

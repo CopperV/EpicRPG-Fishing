@@ -169,7 +169,7 @@ public final class TanalorrFishingController {
 
 		World w = p.getWorld();
 		Location loc1 = p.getEyeLocation();
-		Location loc2 = p.getLocation().add(0,1,0);
+		Location loc2 = loc1.clone().add(0,-1,0);
 		Location target = cont.getHook().getLocation();
 		Vector vec1 = new Vector(target.getX() - loc1.getX(),
 				target.getY() - loc1.getY(),
@@ -177,8 +177,8 @@ public final class TanalorrFishingController {
 		Vector vec2 = new Vector(target.getX() - loc2.getX(),
 				target.getY() - loc2.getY(),
 				target.getZ() - loc2.getZ()).normalize();
-		RayTraceResult result1 = w.rayTrace(loc1, vec1, 80, FluidCollisionMode.ALWAYS, false, .8, cont.getHook()::equals);
-		RayTraceResult result2 = w.rayTrace(loc2, vec2, 80, FluidCollisionMode.ALWAYS, false, .8, cont.getHook()::equals);
+		RayTraceResult result1 = w.rayTrace(loc1, vec1, 80, FluidCollisionMode.NEVER, false, 1, cont.getHook()::equals);
+		RayTraceResult result2 = w.rayTrace(loc2, vec2, 80, FluidCollisionMode.NEVER, false, 1, cont.getHook()::equals);
 		if(result1.getHitEntity() == null || result2.getHitEntity() == null)
 			return;
 		cont.setState(TanalorrFishingState.FISHING);
@@ -281,7 +281,7 @@ public final class TanalorrFishingController {
 				bar.setProgress(cont.getFishingStatus());
 				
 				double movementSpeed = p.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getValue();
-				double pullValue = PULL_FORCE * multiplier * movementSpeed;
+				double pullValue = PULL_FORCE * multiplier * movementSpeed * 6;
 				if(pullValue < 0.1)
 					pullValue = 0.1;
 				

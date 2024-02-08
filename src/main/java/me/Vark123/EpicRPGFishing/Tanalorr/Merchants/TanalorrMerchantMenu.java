@@ -205,9 +205,6 @@ public final class TanalorrMerchantMenu {
 	
 	private EventCreator<InventoryClickEvent> getClickEvent() {
 		Consumer<InventoryClickEvent> event = e -> {
-			if(e.isCancelled())
-				return;
-
 			Inventory inv = e.getView().getTopInventory();
 			if(!inv.getItem(31).getType().equals(Material.PAPER))
 				return;
