@@ -2,9 +2,10 @@ package me.Vark123.EpicRPGFishing.Listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.Event.Result;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
@@ -18,6 +19,12 @@ public class FishingRodClickListener implements Listener {
 		if(result.equals(Result.DENY)) {
 			return;
 		}
+		
+		Action action = e.getAction();
+		if(!(action.equals(Action.RIGHT_CLICK_AIR) 
+				|| action.equals(Action.RIGHT_CLICK_BLOCK)))
+			return;
+		
 		if(!e.getMaterial().equals(Material.FISHING_ROD))
 			return;
 		if(e.getHand().equals(EquipmentSlot.OFF_HAND)) {

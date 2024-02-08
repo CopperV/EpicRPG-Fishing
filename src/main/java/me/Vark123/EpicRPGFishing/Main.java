@@ -2,6 +2,7 @@ package me.Vark123.EpicRPGFishing;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.github.rysefoxx.inventory.plugin.pagination.InventoryManager;
 import lombok.Getter;
 
 @Getter
@@ -11,6 +12,9 @@ public class Main extends JavaPlugin {
 	private static Main inst;
 	
 	private String prefix;
+	
+	@Getter
+	private InventoryManager manager;
 
 	@Override
 	public void onEnable() {
@@ -21,6 +25,9 @@ public class Main extends JavaPlugin {
 		FileManager.init();
 		CommandManager.setExecutors();
 		ListenerManager.registerListeners();
+		
+		manager = new InventoryManager(inst);
+		manager.invoke();
 	}
 
 	@Override

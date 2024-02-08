@@ -41,16 +41,16 @@ public final class FishingController {
 	
 	public ItemStack getRandomFish(int lucky) {
 		Random rand = new Random();
-		int bound = Config.get().getMultiplier() * lucky;
+		int bound = KhorinisConfig.get().getMultiplier() * lucky;
 		int max = Integer.MIN_VALUE;
-		for(int i = 0; i < lucky / 3; ++i) {
+		for(int i = 0; i <= lucky / 3; ++i) {
 			int tmp = rand.nextInt(bound);
 			if(tmp > max)
 				max = tmp;
 		}
 		if(max < 0)
 			return null;
-		String mmId = Config.get().getFishChances().ceilingEntry(max).getValue();
+		String mmId = KhorinisConfig.get().getFishChances().ceilingEntry(max).getValue();
 		if(mmId == null)
 			return null;
 		ItemStack fish = MythicBukkit.inst().getItemManager().getItemStack(mmId);

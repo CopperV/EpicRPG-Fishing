@@ -3,12 +3,15 @@ package me.Vark123.EpicRPGFishing;
 import java.io.File;
 
 import lombok.Getter;
-import me.Vark123.EpicRPGFishing.KhorinisFishing.Config;
+import me.Vark123.EpicRPGFishing.KhorinisFishing.KhorinisConfig;
+import me.Vark123.EpicRPGFishing.Tanalorr.TanalorrConfig;
 
 public class FileManager {
 
 	@Getter
 	private static File khorinisConfig = new File(Main.getInst().getDataFolder(), "config-khorinis.yml");
+	@Getter
+	private static File tanalorrConfig = new File(Main.getInst().getDataFolder(), "config-tanalorr.yml");
 	
 	private FileManager() { }
 	
@@ -17,8 +20,10 @@ public class FileManager {
 			Main.getInst().getDataFolder().mkdir();
 		
 		Main.getInst().saveResource("config-khorinis.yml", false);
+		Main.getInst().saveResource("config-tanalorr.yml", false);
 		
-		Config.get().load();
+		KhorinisConfig.get().load();
+		TanalorrConfig.get().load();
 	}
 	
 }
