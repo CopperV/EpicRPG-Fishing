@@ -1,5 +1,5 @@
 name: EpicRPGFishing
-version: 2.0.1
+version: 2.0.2
 main: me.Vark123.EpicRPGFishing.Main
 author: Vark123
 depend: [MythicMobs,NBTAPI,WorldGuard,MultiWorld,EpicRPG]
