@@ -39,7 +39,7 @@ public class TanalorrFishingRodUseListener implements Listener {
 		}
 		
 		if(!TanalorrFishingController.get().isBaiting(p)) {
-			TanalorrBaitMenu.get().openMenu(p);
+			TanalorrBaitMenu.get().openMenu(p, it);
 			e.setAllowedUsage(false);
 			return;
 		}

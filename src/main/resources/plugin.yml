@@ -2,7 +2,7 @@ name: EpicRPGFishing
 version: 2.0.1
 main: me.Vark123.EpicRPGFishing.Main
 author: Vark123
-depend: [MythicMobs,NBTAPI,WorldGuard,MultiWorld]
+depend: [MythicMobs,NBTAPI,WorldGuard,MultiWorld,EpicRPG]
 api-version: 1.18
 
 libraries:

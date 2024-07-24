@@ -22,8 +22,6 @@ public final class TanalorrBaitMenu {
 
 	private static final TanalorrBaitMenu inst = new TanalorrBaitMenu();
 	
-	private final InventoryProvider provider;
-	
 	private final ItemStack empty;
 	private final ItemStack confirm;
 	
@@ -40,8 +38,28 @@ public final class TanalorrBaitMenu {
 			im.setDisplayName("§bZARZUC WEDKE");
 			confirm.setItemMeta(im);
 		}
-		
-		provider = new InventoryProvider() {
+	}
+	
+	public static final TanalorrBaitMenu get() {
+		return inst;
+	}
+	
+	public void openMenu(Player p, ItemStack fishingRod) {
+		RyseInventory.builder()
+			.title("§3§lZALOZ PRZYNETE")
+			.rows(1)
+			.disableUpdateTask()
+			.ignoredSlots(freeSlots)
+			.enableAction(Action.MOVE_TO_OTHER_INVENTORY)
+			.ignoreClickEvent(DisabledInventoryClick.BOTTOM)
+			.ignoreEvents(DisabledEvents.INVENTORY_DRAG)
+			.provider(getProvider(fishingRod))
+			.build(Main.getInst())
+			.open(p);
+	}
+	
+	private InventoryProvider getProvider(ItemStack fishingRod) {
+		return new InventoryProvider() {
 			@Override
 			public void init(Player player, InventoryContents contents) {
 				for(int i = 0; i < 9; ++i) {
@@ -60,7 +78,18 @@ public final class TanalorrBaitMenu {
 					
 					NBTItem nbt = new NBTItem(it);
 					if(nbt.hasTag("type") 
-							&& nbt.getString("type").equalsIgnoreCase("bait-tanalorr")) {
+							&& nbt.getString("type").equalsIgnoreCase("bait-tanalorr")
+							&& nbt.hasTag("hook")) {
+						
+						NBTItem fishingRodNbt2 = new NBTItem(fishingRod);
+						int hookLevel = fishingRodNbt2.getInteger("hook");
+						int requiredHook = nbt.getInteger("hook");
+						if(requiredHook > hookLevel) {
+							player.closeInventory();
+							TanalorrFishingController.get().launchHook(player, null);
+							return;
+						}
+						
 						if(it.getAmount() < 2)
 							e.getInventory().setItem(4, null);
 						else
@@ -80,24 +109,6 @@ public final class TanalorrBaitMenu {
 				Utils.dropItemStack(player, it);
 			}
 		};
-	}
-	
-	public static final TanalorrBaitMenu get() {
-		return inst;
-	}
-	
-	public void openMenu(Player p) {
-		RyseInventory.builder()
-			.title("§3§lZALOZ PRZYNETE")
-			.rows(1)
-			.disableUpdateTask()
-			.ignoredSlots(freeSlots)
-			.enableAction(Action.MOVE_TO_OTHER_INVENTORY)
-			.ignoreClickEvent(DisabledInventoryClick.BOTTOM)
-			.ignoreEvents(DisabledEvents.INVENTORY_DRAG)
-			.provider(provider)
-			.build(Main.getInst())
-			.open(p);
 	}
 	
 }
