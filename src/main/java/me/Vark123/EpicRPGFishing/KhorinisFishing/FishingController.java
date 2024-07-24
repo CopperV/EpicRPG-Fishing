@@ -41,7 +41,7 @@ public final class FishingController {
 	
 	public ItemStack getRandomFish(int lucky) {
 		Random rand = new Random();
-		int bound = KhorinisConfig.get().getMultiplier() * lucky;
+		int bound = KhorinisConfig.get().getMultiplier() * lucky + 1;
 		int max = Integer.MIN_VALUE;
 		for(int i = 0; i <= lucky / 3; ++i) {
 			int tmp = rand.nextInt(bound);

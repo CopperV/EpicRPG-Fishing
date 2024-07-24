@@ -1,5 +1,6 @@
 package me.Vark123.EpicRPGFishing.Tanalorr;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,15 +39,18 @@ public final class TanalorrFishingController {
 	
 	private final Map<Player, ItemStack> baitingPlayers;
 	private final Map<Player, TanalorrPlayerTempContainer> fishingPlayers;
+	private final Map<Player, Long> lastClicks;
 	
 	private final double CLICK_UPGRADE = 0.07;
 	private final double PULL_FORCE = 0.35;
+	private final long CLICK_DELAY = 250;
 	
 	private final Random rand = new Random();
 	
 	private TanalorrFishingController() {
 		baitingPlayers = new ConcurrentHashMap<>();
 		fishingPlayers = new ConcurrentHashMap<>();
+		lastClicks = new ConcurrentHashMap<>();
 	}
 	
 	public static final TanalorrFishingController get() {
@@ -142,17 +146,25 @@ public final class TanalorrFishingController {
 		TanalorrPlayerTempContainer cont = fishingPlayers.get(p);
 		switch(cont.getState()) {
 			case WAITING:
-				TanalorrFishingController.get().removeHook(p);
+				removeHook(p);
 				break;
 			case BITING:
 				startFishingEvent(cont);
 				break;
 			case FISHING:
+				long now = new Date().getTime();
+				if(lastClicks.containsKey(p)) {
+					long then = lastClicks.get(p);
+					if(now - then < CLICK_DELAY)
+						break;
+				}
+				
 				NBTItem nbt = new NBTItem(cont.getFishingRod());
 				int level = nbt.getInteger("reel");
 				double upgrade = CLICK_UPGRADE * TanalorrUpgradesManager.get().getUpgradeByLevel(TanalorrUpgradeType.REEL, level).getValue();
 				cont.increaseStatus(upgrade);
 				p.playSound(p.getLocation(), Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1.1f, 1.2f);
+				lastClicks.put(p, now);
 				break;
 		}
 	}
@@ -169,17 +181,17 @@ public final class TanalorrFishingController {
 
 		World w = p.getWorld();
 		Location loc1 = p.getEyeLocation();
-		Location loc2 = loc1.clone().add(0,-1,0);
+//		Location loc2 = loc1.clone().add(0,-1,0);
 		Location target = cont.getHook().getLocation();
 		Vector vec1 = new Vector(target.getX() - loc1.getX(),
 				target.getY() - loc1.getY(),
 				target.getZ() - loc1.getZ()).normalize();
-		Vector vec2 = new Vector(target.getX() - loc2.getX(),
-				target.getY() - loc2.getY(),
-				target.getZ() - loc2.getZ()).normalize();
-		RayTraceResult result1 = w.rayTrace(loc1, vec1, 80, FluidCollisionMode.NEVER, false, 1, cont.getHook()::equals);
-		RayTraceResult result2 = w.rayTrace(loc2, vec2, 80, FluidCollisionMode.NEVER, false, 1, cont.getHook()::equals);
-		if(result1.getHitEntity() == null || result2.getHitEntity() == null)
+//		Vector vec2 = new Vector(target.getX() - loc2.getX(),
+//				target.getY() - loc2.getY(),
+//				target.getZ() - loc2.getZ()).normalize();
+		RayTraceResult result1 = w.rayTrace(loc1, vec1, 80, FluidCollisionMode.NEVER, false, 1.5, cont.getHook()::equals);
+//		RayTraceResult result2 = w.rayTrace(loc2, vec2, 80, FluidCollisionMode.NEVER, false, 1, cont.getHook()::equals);
+		if(result1.getHitEntity() == null/* || result2.getHitEntity() == null*/)
 			return;
 		cont.setState(TanalorrFishingState.FISHING);
 		
@@ -310,6 +322,7 @@ public final class TanalorrFishingController {
 			
 			p.spawnParticle(Particle.SMOKE_LARGE, tmp, 0, 0, rand.nextDouble(0.25)+0.1, 0, 0.05);
 		}
+		removeHook(p);
 	}
 	
 }

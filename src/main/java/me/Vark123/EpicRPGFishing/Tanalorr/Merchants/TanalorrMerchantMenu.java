@@ -19,7 +19,6 @@ import de.tr7zw.nbtapi.NBTItem;
 import io.github.rysefoxx.inventory.plugin.content.IntelligentItem;
 import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
 import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.Action;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
 import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
 import io.github.rysefoxx.inventory.plugin.other.EventCreator;
@@ -90,7 +89,7 @@ public final class TanalorrMerchantMenu {
 			.rows(4)
 			.disableUpdateTask()
 			.ignoredSlots(freeSlots)
-			.enableAction(Action.MOVE_TO_OTHER_INVENTORY)
+//			.enableAction(Action.MOVE_TO_OTHER_INVENTORY)
 			.ignoreClickEvent(DisabledInventoryClick.BOTTOM)
 			.ignoreEvents(DisabledEvents.INVENTORY_DRAG)
 			.listener(getClickEvent())
@@ -124,9 +123,21 @@ public final class TanalorrMerchantMenu {
 			contents.updateOrSet(i, empty);
 		
 		contents.updateOrSet(31, IntelligentItem.of(sell, e -> {
+			Inventory inv = contents.pagination().inventory().getInventory();
+			for(int i = 0; i < 27; ++i) {
+				ItemStack it = inv.getItem(i);
+				if(it == null || it.getType().equals(Material.AIR))
+					continue;	
+				
+				contents.updateOrSet(i, it);
+			}
+			
+			contents.removeIgnoredSlots(freeSlots);
+			contents.pagination().inventory().getIgnoreClickEvent().clear();
+			contents.pagination().inventory().getDisabledEvents().clear();
+			
 			generateConfirmationMenu(p, merchant, contents);
 		}));
-		
 	}
 	
 	private void generateConfirmationMenu(Player p, TanalorrMerchant merchant, InventoryContents contents) {
@@ -198,7 +209,13 @@ public final class TanalorrMerchantMenu {
 			
 			p.closeInventory();
 		}));
+		
 		contents.updateOrSet(34, IntelligentItem.of(reject, e -> {
+			contents.addIgnoredSlots(freeSlots);
+			contents.pagination().inventory().getIgnoreClickEvent().clear();
+			contents.pagination().inventory().getIgnoreClickEvent().add(DisabledInventoryClick.BOTTOM);
+			contents.pagination().inventory().getDisabledEvents().add(DisabledEvents.INVENTORY_DRAG);
+			
 			generateSellMenu(p, merchant, contents);
 		}));
 	}
