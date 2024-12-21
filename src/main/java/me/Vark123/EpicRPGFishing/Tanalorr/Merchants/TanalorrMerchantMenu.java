@@ -114,6 +114,7 @@ public final class TanalorrMerchantMenu {
 					
 					Utils.dropItemStack(player, it);
 				}
+				inv.clear();
 			}
 		};
 	}
