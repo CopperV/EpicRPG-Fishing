@@ -6,13 +6,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.tr7zw.nbtapi.NBTItem;
-import io.github.rysefoxx.inventory.plugin.content.IntelligentItem;
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Content.IntelligentItem;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
 import me.Vark123.EpicRPG.Utils.Utils;
 import me.Vark123.EpicRPGFishing.Main;
 
@@ -44,7 +44,7 @@ public final class TanalorrBaitMenu {
 	}
 	
 	public void openMenu(Player p, ItemStack fishingRod) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§3§lZALOZ PRZYNETE")
 			.rows(1)
 			.disableUpdateTask()
@@ -100,7 +100,7 @@ public final class TanalorrBaitMenu {
 				}));
 			}
 			@Override
-			public void close(Player player, RyseInventory inventory) {
+			public void close(Player player, EpicInventory inventory) {
 				ItemStack it = inventory.getInventory().getItem(4);
 				if(it == null || it.getType().equals(Material.AIR))
 					return;

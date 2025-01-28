@@ -16,14 +16,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.tr7zw.nbtapi.NBTItem;
-import io.github.rysefoxx.inventory.plugin.content.IntelligentItem;
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.other.EventCreator;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Content.IntelligentItem;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Other.EventCreator;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
 import me.Vark123.EpicRPG.Core.CoinsSystem;
 import me.Vark123.EpicRPG.Core.MoneySystem;
 import me.Vark123.EpicRPG.Core.RudaSystem;
@@ -84,7 +84,7 @@ public final class TanalorrMerchantMenu {
 	}
 	
 	public void openMenu(Player p, TanalorrMerchant merchant) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title(merchant.getDisplay())
 			.rows(4)
 			.disableUpdateTask()
@@ -105,7 +105,7 @@ public final class TanalorrMerchantMenu {
 				generateSellMenu(p, merchant, contents);
 			}
 			@Override
-			public void close(Player player, RyseInventory inventory) {
+			public void close(Player player, EpicInventory inventory) {
 				Inventory inv = inventory.getInventory();
 				for(int i = 0; i < 27; ++i) {
 					ItemStack it = inv.getItem(i);

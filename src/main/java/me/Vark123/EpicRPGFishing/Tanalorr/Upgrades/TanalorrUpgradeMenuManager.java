@@ -13,13 +13,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.tr7zw.nbtapi.NBTItem;
-import io.github.rysefoxx.inventory.plugin.content.IntelligentItem;
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Content.IntelligentItem;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
 import me.Vark123.EpicRPG.Utils.Utils;
 import me.Vark123.EpicRPGFishing.Main;
 
@@ -75,7 +75,7 @@ public final class TanalorrUpgradeMenuManager {
 				}));
 			}
 			@Override
-			public void close(Player player, RyseInventory inventory) {
+			public void close(Player player, EpicInventory inventory) {
 				ItemStack it = inventory.getInventory().getItem(4);
 				if(it == null || it.getType().equals(Material.AIR))
 					return;
@@ -91,7 +91,7 @@ public final class TanalorrUpgradeMenuManager {
 	}
 	
 	public void openBaseMenu(Player p) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§6§lULEPSZ WEDKE")
 			.rows(1)
 			.disableUpdateTask()
@@ -105,7 +105,7 @@ public final class TanalorrUpgradeMenuManager {
 	}
 	
 	private void openMenu(Player p, MutableObject<ItemStack> fishingRod) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§6§lULEPSZ WEDKE")
 			.rows(1)
 			.disableUpdateTask()
@@ -201,7 +201,7 @@ public final class TanalorrUpgradeMenuManager {
 					}
 				}
 				@Override
-				public void close(Player player, RyseInventory inventory) {
+				public void close(Player player, EpicInventory inventory) {
 					if(fishingRod.getValue() == null)
 						return;
 					
@@ -231,7 +231,7 @@ public final class TanalorrUpgradeMenuManager {
 
 		p.closeInventory();
 		p.playSound(p, Sound.BLOCK_ANVIL_USE, 1, 0.85f);
-		p.spawnParticle(Particle.VILLAGER_HAPPY, p.getLocation().clone().add(0, 1.25, 0), 24, .6f, .6f, .6f, .15f);
+		p.spawnParticle(Particle.HAPPY_VILLAGER, p.getLocation().clone().add(0, 1.25, 0), 24, .6f, .6f, .6f, .15f);
 	}
 	
 	private ItemStack generateUpgradedFishingRod(ItemStack it, int lucky, int rod, int reel, int line, int hook) {

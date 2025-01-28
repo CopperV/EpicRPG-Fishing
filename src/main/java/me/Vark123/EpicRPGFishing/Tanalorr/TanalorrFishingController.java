@@ -320,7 +320,7 @@ public final class TanalorrFishingController {
 			double z = rand.nextDouble(1.5) - 0.75;
 			Location tmp = loc.clone().add(x, 0, z);
 			
-			p.spawnParticle(Particle.SMOKE_LARGE, tmp, 0, 0, rand.nextDouble(0.25)+0.1, 0, 0.05);
+			p.spawnParticle(Particle.LARGE_SMOKE, tmp, 0, 0, rand.nextDouble(0.25)+0.1, 0, 0.05);
 		}
 		removeHook(p);
 	}

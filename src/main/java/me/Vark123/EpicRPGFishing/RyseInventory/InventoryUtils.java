@@ -9,21 +9,21 @@ import org.bukkit.event.Event;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.other.EventCreator;
-import io.github.rysefoxx.inventory.plugin.pagination.Pagination;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory.Builder;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Other.EventCreator;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
+import me.Vark123.EpicInventory.Pagination.EpicInventory.Builder;
+import me.Vark123.EpicInventory.Pagination.Pagination;
 import me.Vark123.EpicRPGFishing.Main;
 
 public class InventoryUtils {
 
 	public static void openNormalMenu(Player p, String title, int size, int[] ignoredSlots,
 			List<EventCreator<? extends Event>> listeners, Inventory inv) {
-		Builder builder = RyseInventory.builder()
+		Builder builder = EpicInventory.builder()
 				.title(title)
 				.size(size)
 				.ignoredSlots(ignoredSlots)
@@ -39,7 +39,7 @@ public class InventoryUtils {
 	
 	public static void openConfirmationMenu(Player p, String title, int size,
 			List<EventCreator<? extends Event>> listeners, Inventory inv) {
-		Builder builder = RyseInventory.builder()
+		Builder builder = EpicInventory.builder()
 				.title(title)
 				.size(size)
 				.disableUpdateTask();
@@ -67,7 +67,7 @@ public class InventoryUtils {
 
 	public static void openNormalMenu(Player p, String title, int size, int[] ignoredSlots,
 			List<EventCreator<? extends Event>> listeners, InventoryContents contents) {
-		Builder builder = RyseInventory.builder()
+		Builder builder = EpicInventory.builder()
 				.title(title)
 				.size(size)
 				.ignoredSlots(ignoredSlots)
@@ -83,7 +83,7 @@ public class InventoryUtils {
 	
 	public static void openConfirmationMenu(Player p, String title, int size,
 			List<EventCreator<? extends Event>> listeners, InventoryContents contents) {
-		Builder builder = RyseInventory.builder()
+		Builder builder = EpicInventory.builder()
 				.title(title)
 				.size(size)
 				.disableUpdateTask();

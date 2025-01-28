@@ -155,7 +155,7 @@ public final class QTEManager {
 		Utils.stopFishing(holder.getHook());
 		
 		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-		p.spawnParticle(Particle.TOTEM, p.getLocation().clone().add(0,1.25,0),
+		p.spawnParticle(Particle.TOTEM_OF_UNDYING, p.getLocation().clone().add(0,1.25,0),
 				15, 0.5, 0.5, 0.5, 0.2);
 		
 		int lucky = holder.getLucky();

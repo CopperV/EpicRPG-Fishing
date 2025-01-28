@@ -2,8 +2,8 @@ package me.Vark123.EpicRPGFishing;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import io.github.rysefoxx.inventory.plugin.pagination.InventoryManager;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Pagination.InventoryManager;
 
 @Getter
 public class Main extends JavaPlugin {

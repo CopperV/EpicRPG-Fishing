@@ -1,7 +1,7 @@
 package me.Vark123.EpicRPGFishing.Tools;
 
 import org.bukkit.Sound;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_21_R1.entity.CraftPlayer;
 import org.bukkit.entity.FishHook;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -23,7 +23,7 @@ public final class Utils {
 				if(p == null || !p.isOnline())
 					return;
 				PacketPlayOutAnimation packet = new PacketPlayOutAnimation(((CraftPlayer)p).getHandle(), 0);
-				((CraftPlayer)p).getHandle().b.a(packet);
+				((CraftPlayer)p).getHandle().c.a(packet);
 				p.playSound(p.getLocation(), Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1, 0.5f);
 			}
 		}.runTask(Main.getInst());

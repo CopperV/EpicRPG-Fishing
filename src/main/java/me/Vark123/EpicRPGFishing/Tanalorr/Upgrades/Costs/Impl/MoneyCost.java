@@ -4,7 +4,8 @@ import org.bukkit.entity.Player;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import me.Vark123.EpicRPG.Main;
+import me.Vark123.EpicRPG.Players.PlayerManager;
+import me.Vark123.EpicRPG.Players.RpgPlayer;
 import me.Vark123.EpicRPGFishing.Tanalorr.Upgrades.Costs.ICost;
 
 @AllArgsConstructor
@@ -20,12 +21,14 @@ public class MoneyCost implements ICost {
 	
 	@Override
 	public boolean check(Player p) {
-		return !(Main.eco.getBalance(p) < amount);
+		RpgPlayer rpg = PlayerManager.getInstance().getRpgPlayer(p);
+		return !(rpg.getVault().getMoney() < amount);
 	}
 
 	@Override
 	public void spend(Player p) {
-		Main.eco.withdrawPlayer(p, amount);
+		RpgPlayer rpg = PlayerManager.getInstance().getRpgPlayer(p);
+		rpg.getVault().removeMoney(amount);
 	}
 
 }
